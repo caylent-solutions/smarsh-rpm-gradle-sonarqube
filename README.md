@@ -2,9 +2,22 @@
 
 RPM package providing SonarQube code quality analysis plugin configuration.
 
-## Provided Tasks
+## What This Package Does
 
-- `sonar` - Run SonarQube analysis
+Applies the SonarQube Gradle plugin with convention-based defaults for project key and name. Projects can override any property in their `build.gradle`. The SonarQube server URL and authentication token are expected as environment variables.
+
+## Tasks Provided
+
+| Task | Description |
+|---|---|
+| `sonar` | Run SonarQube analysis |
+
+## Configs and Assets
+
+| File | Purpose | Synced To |
+|---|---|---|
+| `sonarqube.gradle` | Plugin application and default property configuration | `.packages/smarsh-rpm-gradle-sonarqube/` |
+| `rpm-manifest.properties` | Declares SonarQube plugin dependency for buildscript classpath | `.packages/smarsh-rpm-gradle-sonarqube/` |
 
 ## Default Configuration
 
@@ -17,6 +30,7 @@ RPM package providing SonarQube code quality analysis plugin configuration.
 
 Override defaults in your `build.gradle`:
 
+```groovy
 sonarqube {
     properties {
         property 'sonar.projectKey', 'com.example:my-service'
@@ -24,8 +38,11 @@ sonarqube {
         property 'sonar.github.repository', 'your-org/my-service'
     }
 }
+```
 
 Set the SonarQube server URL via environment variable:
 
+```bash
 export SONAR_HOST_URL=https://sonar.your-company.com
 export SONAR_TOKEN=your-token
+```
